@@ -22,9 +22,12 @@ export class BooksService {
   }
 
   async update(data: Book): Promise<Book> {
-    const findBook = await this.getById(data.id);
-    findBook.set({ ...data });
+    const { id, ...rest } = data;
+
+    const findBook = await this.getById(id);
+    findBook.set({ ...rest });
     await findBook.save();
+
     return findBook;
   }
 

@@ -32,8 +32,8 @@ export class BooksController {
   }
 
   @Put(':id')
-  async update(@Body() body): Promise<Book> {
-    return this.booksService.update(body);
+  async update(@Param() params, @Body() body): Promise<Book> {
+    return this.booksService.update({ ...body, id: params.id });
   }
 
   @Delete(':id')
